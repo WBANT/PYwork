@@ -9,7 +9,7 @@ SCREEN_HEIGHT = 650
 SCREEN_TITLE = "Platformer"
 
 
-# Constants used to scale our sprites from their original size
+# These constansts are used to scale the original size of the sprite
 
 CHARACTER_SCALING = 1
 
@@ -24,7 +24,7 @@ class MyGame(arcade.Window):
 
     def __init__(self):
 
-        # Call the parent class and set up the window
+        # Call the parent class and creating the dimensions of the game window
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
 
