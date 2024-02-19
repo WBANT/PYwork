@@ -28,9 +28,7 @@ class MyGame(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
 
-        # These are 'lists' that keep track of our sprites. Each sprite should
-
-        # go into a list.
+        # These are 'lists' that keep track of our sprites. These sprites are placed in lists.
 
         self.wall_list = None
 
@@ -47,7 +45,7 @@ class MyGame(arcade.Window):
 
         """Set up the game here. Call this function to restart the game."""
 
-        # Create the Sprite lists
+        # Create the Sprite lists, player_list is an object
 
         self.player_list = arcade.SpriteList()
 
