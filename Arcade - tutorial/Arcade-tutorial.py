@@ -8,7 +8,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
 SCREEN_TITLE = "Platformer"
 
-# Constants used to scale our sprites from their original size
+#The scaling of sprites
 CHARACTER_SCALING = 1
 TILE_SCALING = 0.5
 
@@ -70,9 +70,9 @@ class MyGame(arcade.Window):
             self.scene.add_sprite("Walls", wall)
 
 
-        # Put some crates on the ground
+        # Coordinates for the crates
         # This shows using a coordinate list to place sprites
-        coordinate_list = [[512, 96], [256, 96], [768, 96]]
+        coordinate_list = [[512, 96], [256, 96], [768, 96], [963,96]]
 
         for coordinate in coordinate_list:
             # Add a crate on the ground
