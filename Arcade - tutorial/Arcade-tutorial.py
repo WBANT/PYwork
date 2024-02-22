@@ -4,8 +4,8 @@ Platformer Game
 import arcade
 
 # Constants
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 650
+SCREEN_WIDTH = 1600
+SCREEN_HEIGHT = 950
 SCREEN_TITLE = "Platformer"
 
 # Constants used to scale our sprites from their original size
@@ -49,7 +49,7 @@ class MyGame(arcade.Window):
         """Set up the game here. Call this function to restart the game."""
 
 
-        # Set up the Camera
+        # Sets up the camera
 
         self.camera = arcade.Camera(self.width, self.height)
 
@@ -68,9 +68,8 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 96
         self.scene.add_sprite("Player", self.player_sprite)
 
-        # Create the ground
-        # This shows using a loop to place multiple sprites horizontally
-        for x in range(0, 1250, 64):
+        # Create the ground and creates the wall sprite at a certain length horizontally
+        for x in range(0, 2500, 64):
             wall = arcade.Sprite(":resources:images/tiles/grassMid.png", TILE_SCALING)
             wall.center_x = x
             wall.center_y = 32
