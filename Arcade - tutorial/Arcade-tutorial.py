@@ -68,6 +68,14 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 96
         self.scene.add_sprite("Player", self.player_sprite)
 
+        if self.player_sprite.center_x < 0:
+            self.player_sprite.center_x = 64
+            self.player_sprite.center_y = 96
+        
+        if self.player_sprite.center_y < 0:
+            self.player_sprite.center_x = 64
+            self.player_sprite.center_y = 96
+
         # Create the ground and creates the wall sprite at a certain length horizontally
         for x in range(0, 2500, 64):
             wall = arcade.Sprite(":resources:images/tiles/grassMid.png", TILE_SCALING)
@@ -127,6 +135,8 @@ class MyGame(arcade.Window):
             self.player_sprite.change_x = 0
 
 
+
+
     def center_camera_to_player(self):
 
         screen_center_x = self.player_sprite.center_x - (self.camera.viewport_width / 2)
@@ -154,6 +164,7 @@ class MyGame(arcade.Window):
             screen_center_x = 4000
 
         player_centered = screen_center_x, screen_center_y
+
 
 
 
