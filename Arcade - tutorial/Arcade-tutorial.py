@@ -22,7 +22,7 @@ class MyGame(arcade.Window):
     """
     Main application class.
     """
-
+    
     def __init__(self):
 
         # Call the parent class and set up the window
@@ -43,7 +43,7 @@ class MyGame(arcade.Window):
         self.camera = None
 
 
-        arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
+        arcade.set_background_color(arcade.csscolor.SILVER)
 
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
@@ -68,13 +68,7 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 96
         self.scene.add_sprite("Player", self.player_sprite)
 
-        if self.player_sprite.center_x < 0:
-            self.player_sprite.center_x = 64
-            self.player_sprite.center_y = 96
         
-        if self.player_sprite.center_y < 0:
-            self.player_sprite.center_x = 64
-            self.player_sprite.center_y = 96
 
         # Create the ground and creates the wall sprite at a certain length horizontally
         for x in range(0, 2500, 64):
@@ -149,7 +143,7 @@ class MyGame(arcade.Window):
 
 
 
-        # Don't let camera travel past 0 or 4000
+        # Don't let camera travel past 0
 
         if screen_center_x < 0:
 
@@ -158,10 +152,6 @@ class MyGame(arcade.Window):
         if screen_center_y < 0:
 
             screen_center_y = 0
-
-        if screen_center_x > 4000:
-
-            screen_center_x = 4000
 
         player_centered = screen_center_x, screen_center_y
 
