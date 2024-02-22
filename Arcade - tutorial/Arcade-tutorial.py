@@ -77,7 +77,7 @@ class MyGame(arcade.Window):
 
         # Put some crates on the ground
         # This shows using a coordinate list to place sprites
-        coordinate_list = [[512, 96], [256, 96], [768, 96]]
+        coordinate_list = [[512, 96], [256, 96], [768, 96], [996, 192]]
 
         for coordinate in coordinate_list:
             # Add a crate on the ground
@@ -139,7 +139,7 @@ class MyGame(arcade.Window):
 
 
 
-        # Don't let camera travel past 0
+        # Don't let camera travel past 0 or 4000
 
         if screen_center_x < 0:
 
@@ -148,6 +148,10 @@ class MyGame(arcade.Window):
         if screen_center_y < 0:
 
             screen_center_y = 0
+
+        if screen_center_x > 4000:
+
+            screen_center_x = 4000
 
         player_centered = screen_center_x, screen_center_y
 
