@@ -57,7 +57,7 @@ class MyGame(arcade.Window):
         # Sets up the scene
         self.scene = arcade.Scene()
 
-        # Create the Sprite lists
+        # Create the Sprite lists for the scene
         # Removed spatial hashing due to the lack of responsiveness in movement
         self.scene.add_sprite_list("Player")
         self.scene.add_sprite_list("Walls")
@@ -67,6 +67,7 @@ class MyGame(arcade.Window):
         self.player_sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 96
+        '''Adds player sprite to scene'''
         self.scene.add_sprite("Player", self.player_sprite)
 
         # Sets up sprite
@@ -78,6 +79,7 @@ class MyGame(arcade.Window):
             wall = arcade.Sprite(":resources:images/tiles/grassMid.png", TILE_SCALING)
             wall.center_x = x
             wall.center_y = 32
+            '''Adds wall/crate sprite to scene'''
             self.scene.add_sprite("Walls", wall)
 
         # Puts crates at certain coordinates
