@@ -9,8 +9,8 @@ import os
 import arcade
 
 # Constants
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 225
+SCREEN_WIDTH = 1600
+SCREEN_HEIGHT = 900
 SCREEN_TITLE = "Platformer"
 
 # Constants used to scale our sprites from their original size
