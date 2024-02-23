@@ -28,10 +28,10 @@ class MyGame(arcade.Window):
         # accesses the class and setups the window
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
-        # The scene
+        # The scene that contains the walls and sprites
         self.scene = None
 
-        # The player sprite
+        # Seperate instance for the player sprite
         self.player_sprite = None
 
         # The physics engine
@@ -99,16 +99,16 @@ class MyGame(arcade.Window):
     def on_draw(self):
         """Render the screen."""
 
-        # Clear the screen to the background color
+        # Clears the screen for the background to be clean without disturbance from other objects
         self.clear()
 
 
-        # Activate our Camera
+        # Uses* the camera
 
         self.camera.use()
 
 
-        # Draw our Scene
+        # Renders the scene
         self.scene.draw()
 
     def on_key_press(self, key, modifiers):
@@ -145,7 +145,7 @@ class MyGame(arcade.Window):
 
 
 
-        # Don't let camera travel past 0
+        # Doesn't let camera travel past 0
 
         if screen_center_x < 0:
 
