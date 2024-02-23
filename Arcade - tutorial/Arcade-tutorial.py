@@ -3,18 +3,18 @@ Platformer Game
 """
 import arcade
 
-# Constants
-SCREEN_WIDTH = 1600
-SCREEN_HEIGHT = 950
+# Game window
+SCREEN_WIDTH = 1500
+SCREEN_HEIGHT = 800
 SCREEN_TITLE = "Platformer"
 
-# Constants used to scale our sprites from their original size
+# Sprite scaling
 CHARACTER_SCALING = 1
 TILE_SCALING = 0.5
 
-# Movement speed of player, in pixels per frame
+# Movement speed of player; ppf
 PLAYER_MOVEMENT_SPEED = 5
-GRAVITY = 1
+GRAVITY = 0.9
 PLAYER_JUMP_SPEED = 20
 
 
@@ -25,20 +25,20 @@ class MyGame(arcade.Window):
     
     def __init__(self):
 
-        # Call the parent class and set up the window
+        # accesses the class and setups the window
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
-        # Our Scene Object
+        # The scene
         self.scene = None
 
-        # Separate variable that holds the player sprite
+        # The player sprite
         self.player_sprite = None
 
-        # Our physics engine
+        # The physics engine
         self.physics_engine = None
 
 
-        # A Camera that can be used for scrolling the screen
+        # The camera
 
         self.camera = None
 
@@ -54,14 +54,14 @@ class MyGame(arcade.Window):
         self.camera = arcade.Camera(self.width, self.height)
 
 
-        # Initialize Scene
+        # Sets up the scene
         self.scene = arcade.Scene()
 
         # Create the Sprite lists
         self.scene.add_sprite_list("Player")
         self.scene.add_sprite_list("Walls", use_spatial_hash=True)
 
-        # Set up the player, specifically placing it at these coordinates.
+        # Sets up player at the coordinates below
         image_source = ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png"
         self.player_sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
         self.player_sprite.center_x = 64
@@ -77,9 +77,8 @@ class MyGame(arcade.Window):
             wall.center_y = 32
             self.scene.add_sprite("Walls", wall)
 
-        # Put some crates on the ground
-        # This shows using a coordinate list to place sprites
-        coordinate_list = [[512, 96], [256, 96], [768, 96], [996, 192]]
+        # Puts crates at certain coordinates
+        coordinate_list = [[512, 96], [256, 96], [768, 96], [996, 288], [], [], []]
 
         for coordinate in coordinate_list:
             # Add a crate on the ground
