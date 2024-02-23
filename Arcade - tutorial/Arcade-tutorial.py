@@ -1,5 +1,5 @@
 """
-Platformer Game noob
+Platformer Game
 """
 import arcade
 
