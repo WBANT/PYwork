@@ -58,15 +58,18 @@ class MyGame(arcade.Window):
         self.scene = arcade.Scene()
 
         # Create the Sprite lists
+        # Removed spatial hashing due to the lack of responsiveness in movement
         self.scene.add_sprite_list("Player")
-        self.scene.add_sprite_list("Walls", use_spatial_hash=True)
+        self.scene.add_sprite_list("Walls")
 
-        # Sets up player at the coordinates below
-        image_source = ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png"
+        # Sets up the male_adventurer at the coordinates below
+        image_source = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
         self.player_sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 96
         self.scene.add_sprite("Player", self.player_sprite)
+
+        # Sets up sprite
 
         
 
@@ -78,7 +81,7 @@ class MyGame(arcade.Window):
             self.scene.add_sprite("Walls", wall)
 
         # Puts crates at certain coordinates
-        coordinate_list = [[512, 96], [256, 96], [768, 96], [996, 288], [], [], []]
+        coordinate_list = [[512, 96], [256, 96], [768, 96], [996, 288], [1060, 288], [1124, 288], [1188, 288]]
 
         for coordinate in coordinate_list:
             # Add a crate on the ground
