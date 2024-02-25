@@ -11,6 +11,7 @@ SCREEN_TITLE = "Platformer"
 # Constants used to scale our sprites from their original size
 CHARACTER_SCALING = 1
 TILE_SCALING = 0.5
+COIN_SCALING = 0.5
 
 # Movement speed of player, in pixels per frame
 PLAYER_MOVEMENT_SPEED = 5
