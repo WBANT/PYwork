@@ -66,7 +66,7 @@ class MyGame(arcade.Window):
         # Create the Sprite lists for the scene
         # Removed spatial hashing due to the lack of responsiveness in movement
         self.scene.add_sprite_list("Player")
-        self.scene.add_sprite_list("Walls")
+        self.scene.add_sprite_list("Walls", use_spatial_hash=True)
 
         # Sets up the male_adventurer at the coordinates below
         image_source = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
