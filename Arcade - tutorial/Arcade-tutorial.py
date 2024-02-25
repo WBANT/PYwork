@@ -3,19 +3,19 @@ Platformer Game
 """
 import arcade
 
-# Constants
-SCREEN_WIDTH = 1600
-SCREEN_HEIGHT = 950
+# Game window
+SCREEN_WIDTH = 1500
+SCREEN_HEIGHT = 800
 SCREEN_TITLE = "Platformer"
 
-# Constants used to scale our sprites from their original size
+# Sprite scaling
 CHARACTER_SCALING = 1
 TILE_SCALING = 0.5
 COIN_SCALING = 0.5
 
-# Movement speed of player, in pixels per frame
+# Movement speed of player; ppf
 PLAYER_MOVEMENT_SPEED = 5
-GRAVITY = 1
+GRAVITY = 0.9
 PLAYER_JUMP_SPEED = 20
 
 
@@ -26,20 +26,20 @@ class MyGame(arcade.Window):
     
     def __init__(self):
 
-        # Call the parent class and set up the window
+        # accesses the class and setups the window
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
-        # Our Scene Object
+        # The scene that contains the walls and sprites
         self.scene = None
 
-        # Separate variable that holds the player sprite
+        # Seperate instance for the player sprite
         self.player_sprite = None
 
-        # Our physics engine
+        # The physics engine
         self.physics_engine = None
 
 
-        # A Camera that can be used for scrolling the screen
+        # The camera
 
         self.camera = None
 
@@ -55,19 +55,23 @@ class MyGame(arcade.Window):
         self.camera = arcade.Camera(self.width, self.height)
 
 
-        # Initialize Scene
+        # Sets up the scene
         self.scene = arcade.Scene()
 
-        # Create the Sprite lists
+        # Create the Sprite lists for the scene
+        # Removed spatial hashing due to the lack of responsiveness in movement
         self.scene.add_sprite_list("Player")
-        self.scene.add_sprite_list("Walls", use_spatial_hash=True)
+        self.scene.add_sprite_list("Walls")
 
-        # Set up the player, specifically placing it at these coordinates.
-        image_source = ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png"
+        # Sets up the male_adventurer at the coordinates below
+        image_source = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
         self.player_sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 96
+        '''Adds player sprite to scene'''
         self.scene.add_sprite("Player", self.player_sprite)
+
+        # Sets up sprite
 
         
 
@@ -76,11 +80,11 @@ class MyGame(arcade.Window):
             wall = arcade.Sprite(":resources:images/tiles/grassMid.png", TILE_SCALING)
             wall.center_x = x
             wall.center_y = 32
+            '''Adds wall/crate sprite to scene'''
             self.scene.add_sprite("Walls", wall)
 
-        # Put some crates on the ground
-        # This shows using a coordinate list to place sprites
-        coordinate_list = [[512, 96], [256, 96], [768, 96], [996, 192]]
+        # Puts crates at certain coordinates
+        coordinate_list = [[512, 96], [256, 96], [768, 96], [996, 288], [1060, 288], [1124, 288], [1188, 288]]
 
         for coordinate in coordinate_list:
             # Add a crate on the ground
@@ -98,16 +102,16 @@ class MyGame(arcade.Window):
     def on_draw(self):
         """Render the screen."""
 
-        # Clear the screen to the background color
+        # Clears the screen for the background to be clean without disturbance from other objects
         self.clear()
 
 
-        # Activate our Camera
+        # Uses* the camera
 
         self.camera.use()
 
 
-        # Draw our Scene
+        # Renders the scene
         self.scene.draw()
 
     def on_key_press(self, key, modifiers):
@@ -144,7 +148,7 @@ class MyGame(arcade.Window):
 
 
 
-        # Don't let camera travel past 0
+        # Doesn't let camera travel past 0
 
         if screen_center_x < 0:
 
