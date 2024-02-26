@@ -48,6 +48,12 @@ class MyGame(arcade.Window):
 
         self.camera = None
 
+        # A Camera that can be used to draw GUI elements
+        self.gui_camera = None
+
+        # Keep track of the score
+        self.score = 0
+
 
         arcade.set_background_color(arcade.csscolor.SILVER)
 
@@ -59,6 +65,11 @@ class MyGame(arcade.Window):
 
         self.camera = arcade.Camera(self.width, self.height)
 
+        # Set up the GUI Camera
+        self.gui_camera = arcade.Camera(self.width, self.height)
+
+        # Keep track of the score
+        self.score = 0
 
         # Sets up the scene
         self.scene = arcade.Scene()
@@ -125,6 +136,19 @@ class MyGame(arcade.Window):
 
         # Renders the scene
         self.scene.draw()
+
+        # Activate the GUI camera before drawing GUI elements
+        self.gui_camera.use()
+
+        # Draw our score on the screen, scrolling it with the viewport
+        score_text = f"Score: {self.score}"
+        arcade.draw_text(
+            score_text,
+            10,
+            10,
+            arcade.csscolor.WHITE,
+            18,
+        )
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
