@@ -220,6 +220,7 @@ class MyGame(arcade.Window):
             coin.remove_from_sprite_lists()
             # Play a sound
             arcade.play_sound(self.collect_coin_sound)
+            self.score += 1
 
         # Position the camera
 
