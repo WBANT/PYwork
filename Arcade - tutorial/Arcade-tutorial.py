@@ -1,6 +1,7 @@
 """
 Platformer Game
 """
+import os
 import arcade
 
 # Game window
