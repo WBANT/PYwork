@@ -1,7 +1,6 @@
 """
 Platformer Game
 """
-import os
 import arcade
 
 # Constants
@@ -15,9 +14,6 @@ TILE_SCALING = 0.5
 COIN_SCALING = 0.5
 SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = SPRITE_PIXEL_SIZE * TILE_SCALING
-
-#MAIN_PATH
-MAIN_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Movement speed of player, in pixels per frame
 PLAYER_MOVEMENT_SPEED = 10
@@ -113,7 +109,7 @@ class MyGame(arcade.Window):
 
         # Map name
 
-        map_name = f"{MAIN_PATH}/map1_level_{self.level}"
+        map_name = f":resources:tiled_maps/map2_level_{self.level}.json"
 
 
 
