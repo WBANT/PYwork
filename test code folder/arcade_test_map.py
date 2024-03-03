@@ -2,11 +2,13 @@
 Platformer Game
 """
 import arcade
+import os
 
 # Constants
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
 SCREEN_TITLE = "Platformer"
+MAIN_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Constants used to scale our sprites from their original size
 CHARACTER_SCALING = 1
@@ -109,7 +111,7 @@ class MyGame(arcade.Window):
 
         # Map name
 
-        map_name = f":resources:tiled_maps/map2_level_{self.level}.json"
+        map_name = f":resources:tiled_maps/map1_level_{self.level}.tmx"
 
 
 
