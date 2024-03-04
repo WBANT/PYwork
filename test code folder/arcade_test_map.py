@@ -111,7 +111,7 @@ class MyGame(arcade.Window):
 
         # Map name
 
-        map_name = f":resources:tiled_maps/map1_level_{self.level}.tmx"
+        map_name = f":resources:tiled_maps/map2_level_{self.level}.json"
 
 
 
