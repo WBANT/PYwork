@@ -111,7 +111,7 @@ class MyGame(arcade.Window):
 
         # Map name
 
-        map_name = f"{MAIN_PATH}/downloads/maps/map1_level_{self.level}.tmx"
+        map_name = f"{MAIN_PATH}/maps/map1_level_{self.level}.tmx"
 
 
 
