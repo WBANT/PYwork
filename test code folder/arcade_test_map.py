@@ -11,7 +11,7 @@ SCREEN_TITLE = "Platformer"
 MAIN_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Constants used to scale our sprites from their original size
-CHARACTER_SCALING = 1
+CHARACTER_SCALING = 0.5
 TILE_SCALING = 0.5
 COIN_SCALING = 0.5
 SPRITE_PIXEL_SIZE = 128
