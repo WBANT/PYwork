@@ -167,7 +167,7 @@ class MyGame(arcade.Window):
 
 
         # Set up the player, specifically placing it at these coordinates.
-        image_source = ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png"
+        image_source = f"{MAIN_PATH}/Documents/PYTHON work/PYwork/test code folder/Tiles/Default/tile_0240.png"
         self.player_sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
         self.player_sprite.center_x = PLAYER_START_X
 
