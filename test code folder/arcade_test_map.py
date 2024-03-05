@@ -33,7 +33,7 @@ PLAYER_START_Y = 225
 
 # Layer Names from our TileMap
 
-LAYER_NAME_PLATFORMS = "Platforms"
+LAYER_NAME_PLATFORMS = "Platform"
 
 LAYER_NAME_COINS = "Coins"
 
