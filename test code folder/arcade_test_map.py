@@ -43,6 +43,8 @@ LAYER_NAME_BACKGROUND = "Background"
 
 LAYER_NAME_DONT_TOUCH = "Don't Touch"
 
+LAYER_NAME_LADDERS = "Ladders"
+
 
 
 class MyGame(arcade.Window):
@@ -131,6 +133,10 @@ class MyGame(arcade.Window):
 
             },
 
+            LAYER_NAME_LADDERS: {
+                "use_spatial_hash": True,
+            },
+
             LAYER_NAME_DONT_TOUCH: {
 
                 "use_spatial_hash": True,
@@ -192,6 +198,7 @@ class MyGame(arcade.Window):
         self.physics_engine = arcade.PhysicsEnginePlatformer(
             self.player_sprite,
             gravity_constant=GRAVITY,
+            ladders=self.scene[LAYER_NAME_LADDERS],
             walls=self.scene[LAYER_NAME_PLATFORMS],
         )
 
@@ -224,9 +231,14 @@ class MyGame(arcade.Window):
         """Called whenever a key is pressed."""
 
         if key == arcade.key.UP or key == arcade.key.W:
-            if self.physics_engine.can_jump():
+            if self.physics_engine.is_on_ladder():
+                self.player_sprite.change_y = PLAYER_MOVEMENT_SPEED
+            elif self.physics_engine.can_jump():
                 self.player_sprite.change_y = PLAYER_JUMP_SPEED
                 arcade.play_sound(self.jump_sound)
+        elif key == arcade.key.DOWN or key == arcade.key.S:
+            if self.physics_engine.is_on_ladder():
+                self.player_sprite.change_y = -PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT or key == arcade.key.D:
@@ -235,7 +247,13 @@ class MyGame(arcade.Window):
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 
-        if key == arcade.key.LEFT or key == arcade.key.A:
+        if key == arcade.key.UP or key == arcade.key.W:
+            if self.physics_engine.is_on_ladder():
+                self.player_sprite.change_y = 0
+        elif key == arcade.key.DOWN or key == arcade.key.S:
+            if self.physics_engine.is_on_ladder():
+                self.player_sprite.change_y = 0
+        elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player_sprite.change_x = 0
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player_sprite.change_x = 0
@@ -243,7 +261,7 @@ class MyGame(arcade.Window):
     def center_camera_to_player(self):
         screen_center_x = self.player_sprite.center_x - (self.camera.viewport_width / 4)
         screen_center_y = self.player_sprite.center_y - (
-            self.camera.viewport_height / 1
+            self.camera.viewport_height / 2
         )
         if screen_center_x < 0:
             screen_center_x = 0
@@ -251,13 +269,18 @@ class MyGame(arcade.Window):
             screen_center_y = 0
         player_centered = screen_center_x, screen_center_y
 
-        self.camera.move_to(player_centered)
+        self.camera.move_to(player_centered, 0.2)
 
     def update(self, delta_time):
         """Movement and game logic"""
 
         # Move the player with the physics engine
         self.physics_engine.update()
+
+        # Update animations
+        self.scene.update_animation(
+            delta_time, [LAYER_NAME_COINS, LAYER_NAME_BACKGROUND]
+        )
 
         # See if we hit any coins
         coin_hit_list = arcade.check_for_collision_with_list(
@@ -266,16 +289,17 @@ class MyGame(arcade.Window):
 
         # Loop through each coin we hit (if any) and remove it
         for coin in coin_hit_list:
+
+            # Figure out how many points this coin is worth
+            if "Points" not in coin.properties:
+                print("Warning, collected a coin without a Points property.")
+            else:
+                points = int(coin.properties["Points"])
+                self.score += points
+
             # Remove the coin
             coin.remove_from_sprite_lists()
-
-            # Play a sound
-
             arcade.play_sound(self.collect_coin_sound)
-
-            # Add one to the score
-
-            self.score += 1
 
 
 
