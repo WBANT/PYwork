@@ -5,29 +5,29 @@ import arcade
 import os
 
 # Constants
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 300
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 900
 SCREEN_TITLE = "Platformer"
 MAIN_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Constants used to scale our sprites from their original size
-CHARACTER_SCALING = 0.5
-TILE_SCALING = 0.5
+CHARACTER_SCALING = 2
+TILE_SCALING = 4
 COIN_SCALING = 0.5
 SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = SPRITE_PIXEL_SIZE * TILE_SCALING
 
 # Movement speed of player, in pixels per frame
-PLAYER_MOVEMENT_SPEED = 2
-GRAVITY = 0.75
-PLAYER_JUMP_SPEED = 5
+PLAYER_MOVEMENT_SPEED = 8
+GRAVITY = 0.5
+PLAYER_JUMP_SPEED = 15
 
 
 # Player starting position
 
-PLAYER_START_X = 64
+PLAYER_START_X = 128
 
-PLAYER_START_Y = 225
+PLAYER_START_Y = 450
 
 
 
