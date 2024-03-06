@@ -19,8 +19,8 @@ GRID_PIXEL_SIZE = SPRITE_PIXEL_SIZE * TILE_SCALING
 
 # Movement speed of player, in pixels per frame
 PLAYER_MOVEMENT_SPEED = 8
-GRAVITY = 0.5
-PLAYER_JUMP_SPEED = 15
+GRAVITY = 1
+PLAYER_JUMP_SPEED = 30
 
 
 # Player starting position
