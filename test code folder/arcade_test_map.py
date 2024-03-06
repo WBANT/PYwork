@@ -243,7 +243,7 @@ class MyGame(arcade.Window):
     def center_camera_to_player(self):
         screen_center_x = self.player_sprite.center_x - (self.camera.viewport_width / 4)
         screen_center_y = self.player_sprite.center_y - (
-            self.camera.viewport_height / 4
+            self.camera.viewport_height / 1
         )
         if screen_center_x < 0:
             screen_center_x = 0
