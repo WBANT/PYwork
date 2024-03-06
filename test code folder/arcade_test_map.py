@@ -19,7 +19,7 @@ GRID_PIXEL_SIZE = SPRITE_PIXEL_SIZE * TILE_SCALING
 
 # Movement speed of player, in pixels per frame
 PLAYER_MOVEMENT_SPEED = 2
-GRAVITY = 1
+GRAVITY = 0.75
 PLAYER_JUMP_SPEED = 5
 
 
@@ -216,7 +216,7 @@ class MyGame(arcade.Window):
             score_text,
             10,
             10,
-            arcade.csscolor.BLACK,
+            arcade.csscolor.WHITE,
             18,
         )
 
@@ -241,9 +241,9 @@ class MyGame(arcade.Window):
             self.player_sprite.change_x = 0
 
     def center_camera_to_player(self):
-        screen_center_x = self.player_sprite.center_x - (self.camera.viewport_width / 2)
+        screen_center_x = self.player_sprite.center_x - (self.camera.viewport_width / 4)
         screen_center_y = self.player_sprite.center_y - (
-            self.camera.viewport_height / 2
+            self.camera.viewport_height / 4
         )
         if screen_center_x < 0:
             screen_center_x = 0
