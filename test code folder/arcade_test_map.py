@@ -5,8 +5,8 @@ import arcade
 import os
 
 # Constants
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 650
+SCREEN_WIDTH = 400
+SCREEN_HEIGHT = 300
 SCREEN_TITLE = "Platformer"
 MAIN_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,7 +20,7 @@ GRID_PIXEL_SIZE = SPRITE_PIXEL_SIZE * TILE_SCALING
 # Movement speed of player, in pixels per frame
 PLAYER_MOVEMENT_SPEED = 2
 GRAVITY = 1
-PLAYER_JUMP_SPEED = 20
+PLAYER_JUMP_SPEED = 5
 
 
 # Player starting position
