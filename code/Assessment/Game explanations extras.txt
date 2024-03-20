@@ -1,0 +1,2 @@
+"""Game window, sets the game windows neccessary parameters"""
+
