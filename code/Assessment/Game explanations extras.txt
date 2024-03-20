@@ -1,2 +1,4 @@
 """Game window, sets the game windows neccessary parameters"""
 
+"""The MyGame class is the class that will be identified as the main application"""
+
