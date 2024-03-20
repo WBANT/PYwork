@@ -2,3 +2,13 @@
 
 """The MyGame class is the class that will be identified as the main application"""
 
+""" Set's up the game window, with the dimensions above height, width and title by calling the class 'MyGame'. Set's background color to black. """
+
+"""Renders the screen by drawing the game elements. Clears the screen with 'self.clear()' """
+
+"""Main function for the program. The 'MyGame' class is stored inside the 'window' variable.
+The window instance is called to run the setup for the game. The arcade.run runs the game, by looping and constantly
+updating the draw function for the game window."""
+
+"""The program checks to see if the program is running from the main file, and if it is then it starts the program.
+If not, then the program won't run the main file. """
