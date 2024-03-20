@@ -29,10 +29,11 @@ PLAYER_START_Y = 450
 LAYER_NAME_PLATFORM = "Platform"
 LAYER_NAME_POTION = "Potion"
 LAYER_NAME_FOREGROUND = "Foreground"
-LAYER_NAME_FOREGROUND_TOP = "Foreground_top"
+LAYER_NAME_BACKGROUND_TOP = "Background_top"
 LAYER_NAME_BACKGROUND = "Background"
 LAYER_NAME_DO_NOT_TOUCH = "Do_not_touch"
 LAYER_NAME_LADDER = "Ladder"
+
 
 """ The class 'Mygame' is the main application """
 
@@ -71,18 +72,19 @@ class MyGame(arcade.Window):
         # Level
         self.level = 1
 
-        arcade.set_background_color(arcade.csscolor.BLACK)
+
 
 
     def setup(self):
         """Sets up the game, loads and creates game resources and objects."""
+
         # Set up the Cameras
         self.camera = arcade.Camera(self.width, self.height)
         self.gui_camera = arcade.Camera(self.width, self.height)
 
         # Map name
 
-        map_name = f"{MAIN_PATH}/map1_level_{self.level}.tmx"
+        map_name = f"{MAIN_PATH}Assessment/map_level_{self.level}.tmx"
 
 
 
@@ -112,14 +114,66 @@ class MyGame(arcade.Window):
             },
         }
 
-        pass       
+        # Load in TileMap
+        self.tile_map = arcade.load_tilemap(map_name, TILE_SCALING, layer_options)
 
+        # Initiate New Scene with our TileMap, this will automatically add all layers
+        # from the map as SpriteLists in the scene in the proper order.
+        self.scene = arcade.Scene.from_tilemap(self.tile_map)       
+
+        # Add Player Spritelist before "Foreground" layer. This will make the foreground
+
+        # be drawn after the player, making it appear to be in front of the Player.
+        # Setting before using scene.add_sprite allows us to define where the SpriteList
+        # will be in the draw order. If we just use add_sprite, it will be appended to the
+        # end of the order.
+
+        self.scene.add_sprite_list_after("Player", LAYER_NAME_FOREGROUND)
+
+        # Calculate the right edge of the my_map in pixels
+        self.end_of_map = self.tile_map.width * GRID_PIXEL_SIZE
+
+        # --- Other stuff
+        # Set the background color
+        if self.tile_map.background_color:
+
+            arcade.set_background_color(self.tile_map.background_color)
+
+
+        # Create the 'physics engine'
+        self.physics_engine = arcade.PhysicsEnginePlatformer(
+            self.player_sprite,
+            gravity_constant=GRAVITY,
+            ladders=self.scene[LAYER_NAME_LADDER],
+            walls=self.scene[LAYER_NAME_PLATFORM],
+        )
 
     def on_draw(self):
         """Renders the screen by drawing the game elements. Clears the screen with 'self.clear()' """
 
         self.clear()
 
+        # Activate the game camera
+        self.camera.use()
+
+        # Draw our Scene
+        self.scene.draw()
+
+        # Activate the GUI camera before drawing GUI elements
+        self.gui_camera.use()
+
+    def center_camera_to_player(self):
+        screen_center_x = self.player_sprite.center_x - (self.camera.viewport_width / 4)
+        screen_center_y = self.player_sprite.center_y - (
+            self.camera.viewport_height / 2
+        )
+        if screen_center_x < 0:
+            screen_center_x = 0
+        if screen_center_y < 0:
+            screen_center_y = 0
+        player_centered = screen_center_x, screen_center_y
+
+        self.camera.move_to(player_centered, 0.2)
 
 def main():
     """Main function for the program"""
