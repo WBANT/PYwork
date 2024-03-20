@@ -84,11 +84,11 @@ class MyGame(arcade.Window):
 
         # MAIN_PATH PROBLEM
         """!!!"""
-        map_name = f"{MAIN_PATH}\Maps\map_level_{self.level}.tmx"
+        map_name = f"{MAIN_PATH}\map_level_{self.level}.tmx"
 
 
 
-        # Layer Specific Options for the Tilemap
+
 
         layer_options = {
 
@@ -114,7 +114,7 @@ class MyGame(arcade.Window):
             },
         }
 
-        # Load in TileMap
+       
         self.tile_map = arcade.load_tilemap(map_name, TILE_SCALING, layer_options)
 
         # Initiate New Scene with our TileMap, this will automatically add all layers
