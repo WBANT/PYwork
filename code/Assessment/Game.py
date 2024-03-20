@@ -74,7 +74,7 @@ class MyGame(arcade.Window):
         self.level = 1
 
         # Variable to hold our texture for our player
-        self.player_texture = arcade.load_texture(f"{MAIN_PATH}/Assets/Character/Sprites/Walk/ToWalk/ToWalk1.png")
+        self.player_texture = arcade.load_texture(f"{MAIN_PATH}/Assets/Character/Sprites/Idle/Idle1.png")
 
         # Separate variable that holds the player sprite
         self.player_sprite = arcade.Sprite(self.player_texture)
@@ -122,7 +122,7 @@ class MyGame(arcade.Window):
         }
 
        
-        self.tile_map = arcade.load_tilemap(map_name, TILE_SCALING, layer_options)
+        self.tile_map = arcade.load_tilemap(map_name, TILE_SCALING)
 
         # Initiate New Scene with our TileMap, this will automatically add all layers
         # from the map as SpriteLists in the scene in the proper order.
