@@ -82,8 +82,8 @@ class MyGame(arcade.Window):
         self.camera = arcade.Camera(self.width, self.height)
         self.gui_camera = arcade.Camera(self.width, self.height)
 
-        # Map name
-
+        # MAIN_PATH PROBLEM
+        """!!!"""
         map_name = f"{MAIN_PATH}Assessment/map_level_{self.level}.tmx"
 
 
