@@ -37,6 +37,7 @@ LAYER_NAME_LADDER = "Ladder"
 
 """ The class 'Mygame' is the main application """
 
+
 class MyGame(arcade.Window):
 
     #Set's up the game window, by calling the class 'MyGame'.
@@ -72,7 +73,13 @@ class MyGame(arcade.Window):
         # Level
         self.level = 1
 
+        # Variable to hold our texture for our player
+        self.player_texture = arcade.load_texture(f"{MAIN_PATH}/Assets/Character/Sprites/Walk/ToWalk/ToWalk1.png")
 
+        # Separate variable that holds the player sprite
+        self.player_sprite = arcade.Sprite(self.player_texture)
+        self.player_sprite.center_x = 64
+        self.player_sprite.center_y = 128
 
 
     def setup(self):
@@ -84,7 +91,7 @@ class MyGame(arcade.Window):
 
         # MAIN_PATH PROBLEM
         """!!!"""
-        map_name = f"{MAIN_PATH}\map_level_{self.level}.tmx"
+        map_name = f"{MAIN_PATH}\Maps\map_level_{self.level}.tmx"
 
 
 
@@ -130,6 +137,15 @@ class MyGame(arcade.Window):
 
         self.scene.add_sprite_list_after("Player", LAYER_NAME_FOREGROUND)
 
+        # Set up the player, specifically placing it at these coordinates.
+        image_source = f"{MAIN_PATH}/Assets/Character/Sprites/Walk/ToWalk/ToWalk1.png"
+        self.player_sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
+        self.player_sprite.center_x = PLAYER_START_X
+
+        self.player_sprite.center_y = PLAYER_START_Y
+
+        self.scene.add_sprite("Player", self.player_sprite)
+
         # Calculate the right edge of the my_map in pixels
         self.end_of_map = self.tile_map.width * GRID_PIXEL_SIZE
 
@@ -174,6 +190,90 @@ class MyGame(arcade.Window):
         player_centered = screen_center_x, screen_center_y
 
         self.camera.move_to(player_centered, 0.2)
+
+    def update(self, delta_time):
+        """Movement and game logic"""
+
+        # Move the player with the physics engine
+        self.physics_engine.update()
+
+        # Update animations
+        self.scene.update_animation(
+            delta_time, [LAYER_NAME_POTION, LAYER_NAME_BACKGROUND]
+        )
+
+        # See if we hit any coins
+        coin_hit_list = arcade.check_for_collision_with_list(
+            self.player_sprite, self.scene[LAYER_NAME_POTION]
+        )
+
+        # Loop through each coin we hit (if any) and remove it
+        for coin in coin_hit_list:
+
+            # Figure out how many points this coin is worth
+            if "Points" not in coin.properties:
+                print("Warning, collected a coin without a Points property.")
+            else:
+                points = int(coin.properties["Points"])
+                self.score += points
+
+            # Remove the coin
+            coin.remove_from_sprite_lists()
+            arcade.play_sound(self.collect_coin_sound)
+
+
+
+        # Did the player fall off the map?
+
+        if self.player_sprite.center_y < -100:
+
+            self.player_sprite.center_x = PLAYER_START_X
+
+            self.player_sprite.center_y = PLAYER_START_Y
+
+
+
+            arcade.play_sound(self.game_over)
+
+
+
+        # Did the player touch something they should not?
+
+        if arcade.check_for_collision_with_list(
+
+            self.player_sprite, self.scene[LAYER_NAME_DO_NOT_TOUCH]
+
+        ):
+
+            self.player_sprite.change_x = 0
+
+            self.player_sprite.change_y = 0
+
+            self.player_sprite.center_x = PLAYER_START_X
+
+            self.player_sprite.center_y = PLAYER_START_Y
+
+
+
+            arcade.play_sound(self.game_over)
+
+
+
+        # See if the user got to the end of the level
+
+        if self.player_sprite.center_x >= self.end_of_map:
+
+            # Advance to the next level
+            self.level += 1
+
+            # Make sure to keep the score from this level when setting up the next level
+            self.reset_score = False
+
+            # Load the next level
+            self.setup()
+
+        # Position the camera
+        self.center_camera_to_player()
 
 def main():
     """Main function for the program"""
