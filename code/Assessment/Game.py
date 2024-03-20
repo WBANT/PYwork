@@ -84,7 +84,7 @@ class MyGame(arcade.Window):
 
         # MAIN_PATH PROBLEM
         """!!!"""
-        map_name = f"{MAIN_PATH}Assessment/map_level_{self.level}.tmx"
+        map_name = f"{MAIN_PATH}\Maps\map_level_{self.level}.tmx"
 
 
 
