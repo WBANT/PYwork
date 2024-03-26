@@ -128,12 +128,7 @@ class MyGame(arcade.Window):
         # from the map as SpriteLists in the scene in the proper order.
         self.scene = arcade.Scene.from_tilemap(self.tile_map)       
 
-        # Add Player Spritelist before "Foreground" layer. This will make the foreground
-
-        # be drawn after the player, making it appear to be in front of the Player.
-        # Setting before using scene.add_sprite allows us to define where the SpriteList
-        # will be in the draw order. If we just use add_sprite, it will be appended to the
-        # end of the order.
+        # Add Player Spritelist before "Foreground" layer. This will make the foreground be drawn after the player, making it appear to be in front of the Player.
 
         self.scene.add_sprite_list_after("Player", LAYER_NAME_FOREGROUND)
 
@@ -149,7 +144,7 @@ class MyGame(arcade.Window):
         # Calculate the right edge of the my_map in pixels
         self.end_of_map = self.tile_map.width * GRID_PIXEL_SIZE
 
-        # --- Other stuff
+
         # Set the background color
         if self.tile_map.background_color:
 
